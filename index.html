@@ -14,10 +14,10 @@
 // Tạo bản đồ nền
 var map = L.map('map').setView([20.5, 106.4], 11);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap'
+  attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Hàm chọn màu theo population_density
+// Hàm chọn màu theo Population Density
 function getColor(d) {
   return d > 2500 ? '#800026' :
          d > 2000 ? '#BD0026' :
@@ -32,7 +32,7 @@ function getColor(d) {
 // Hàm style cho mỗi xã
 function style(feature) {
   return {
-    fillColor: getColor(feature.properties.Population Density), // 
+    fillColor: getColor(feature.properties["Population Density"]), // đúng tên trường
     weight: 1,
     opacity: 1,
     color: 'white',
@@ -62,8 +62,8 @@ var legend = L.control({position: 'topright'});
 
 legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend'),
-    grades = [0, 200, 500, 1000, 1500, 2000, 2500],
-    labels = [];
+      grades = [0, 200, 500, 1000, 1500, 2000, 2500],
+      labels = [];
 
   div.innerHTML += "<strong>Population density<br>(people/km²)</strong><br>";
 
@@ -92,7 +92,7 @@ title.addTo(map);
 </script>
 
 <style>
-/* Style chữ label xã */
+/* Style label tên xã */
 .label {
   font-size: 11px;
   font-weight: bold;
@@ -110,7 +110,7 @@ title.addTo(map);
   box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
 }
 
-/* Style Legend với khung */
+/* Style Legend có viền */
 .info.legend {
   background: white;
   padding: 10px;
