@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WebGIS Q2 midterm2 of student - 2106080079</title>
+  <title>WebGIS Q2 midterm2 of student - 2106080079</title>  <!-- Tab trình duyệt -->
   <meta charset="utf-8" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
 
-<div id="map" style="width: 100%; height: 100vh;"></div>
+<!-- Div chứa bản đồ -->
+<div id="map" style="width: 100%; height: 100vh; position: relative;"></div>
+
+<!-- Div title nằm trên bản đồ -->
+<div id="map-title">WebGIS Q2 midterm2 of student - 2106080079<br>Study area: Đông Hưng, Thái Bình</div>
 
 <script>
 // Tạo bản đồ nền
@@ -29,10 +33,10 @@ function getColor(d) {
                     '#FFEDA0';
 }
 
-// Hàm style cho mỗi xã
+// Hàm style cho các xã
 function style(feature) {
   return {
-    fillColor: getColor(feature.properties["Population Density"]), // đúng tên trường
+    fillColor: getColor(feature.properties["Population Density"]),
     weight: 1,
     opacity: 1,
     color: 'white',
@@ -57,7 +61,7 @@ fetch('Dong_Hung_pop_dens.geojson')
     }).addTo(map);
   });
 
-// Thêm Legend
+// Legend
 var legend = L.control({position: 'topright'});
 
 legend.onAdd = function (map) {
@@ -78,21 +82,10 @@ legend.onAdd = function (map) {
 
 legend.addTo(map);
 
-// Thêm Title
-var title = L.control({position: 'topleft'});
-
-title.onAdd = function (map) {
-  var div = L.DomUtil.create('div', 'title');
-  div.innerHTML = "<h3>WebGIS Q2 midterm2 of student - 2106080079<br>Study area: Đông Hưng, Thái Bình</h3>";
-  return div;
-};
-
-title.addTo(map);
-
 </script>
 
 <style>
-/* Style label tên xã */
+/* Label tên xã */
 .label {
   font-size: 11px;
   font-weight: bold;
@@ -100,17 +93,22 @@ title.addTo(map);
   text-shadow: 1px 1px white;
 }
 
-/* Style Title */
-.title {
+/* Hộp Title nằm trên bản đồ */
+#map-title {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   background: white;
-  padding: 6px;
+  padding: 8px 15px;
   border-radius: 8px;
-  text-align: center;
   font-weight: bold;
+  text-align: center;
   box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  z-index: 1000;
 }
 
-/* Style Legend có viền */
+/* Legend */
 .info.legend {
   background: white;
   padding: 10px;
